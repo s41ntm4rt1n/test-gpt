@@ -1,0 +1,84 @@
+      {% load static %}
+      <!-- START SIDENAV -->
+      <div class="side-nav col-lg-3 text-white" id="sidebar">
+        <!-- START NEW CHAT BUTTON -->
+        <div class="row px-2 pt-3 sticky-top bg-black">
+          <div class="row col-lg-10  pt-3">
+			<a class="nav-link" href="{% url 'chat:new_chat' %}">
+				<div class="chat-btn d-flex align-items-center">
+				<span class="d-block"><i class="bi bi-plus"></i>New Chat</span>
+				</div>
+			</a>
+          </div>
+        </div>
+        <div class="px-1">
+          <ul class="list-unstyled">
+			{% if user.is_authenticated %}
+            {% for chat in board %}
+            <li class="nav-item rounded-1">
+			  	<div class=" row col-lg-12">
+            <div class="col-lg-8"><a class="nav-link text-white" href="{% url 'chat:chat' chat.slug %}"><p class="form-label"><i class="bi bi-chat-left-text-fill"></i>Chat {{ forloop.counter }}</p></a></div>
+          <div class="col-lg-4"><a class="nav-link text-white" href="{% url 'chat:delete_chat' chat_slug=chat.slug %}"><i class="bi bi-trash3-fill"></i></a></div>
+        </div>
+            </li>
+            {% endfor %}
+			{% endif %}
+          </ul>
+        </div>
+        <hr/>
+        <div class="row sticky-bottom pb-3">
+          <div class="col-12 bg-dark">
+            <ul class="list-unstyled">
+              {% if user.is_authenticated %}
+              <li class="bg-success disabled rounded-2">
+                <p class="text-white text-capitalize " >
+                  <i class="bi bi-person-circle"></i>{{ user.username }}
+                </p>
+              </li>
+              <!-- START SETTINGS -->
+              <li class="nav-item rounded-2">
+                <a class="nav-link text-white" href="#">
+                  <i class="fas fa-cog"></i> Settings
+                </a>
+              </li>
+              <!-- START GET HELP -->
+              <li class="nav-item rounded-2">
+                <a class="nav-link text-white" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+
+                <i class="fas fa-question-circle"></i> Get Help
+
+                  
+                </a>
+              </li>
+              <!-- START LOG OUT -->
+              <li class="nav-item rounded-2">
+                <a class="nav-link text-white" href="{% url 'chat:logout' %}">
+                  <i class="fas fa-sign-out-alt"></i> Log Out
+                </a>
+              </li>
+              {% else %}
+              <li class="nav-item rounded-2">
+                <a class="nav-link text-white" href="{% url 'chat:login' %}">
+                  <i class="fas fa-sign-in-alt"></i> Log In
+                </a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" >
+          <div class="modal-content" style="height:220px;">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Need help?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body my-4">
+              For more regarding developer mode read <span class="text-info"><a href="#">this blog</a>.</span>
+              <br>For more information regarding the api used, read the Open AI API docs <span class="text-info"><a href="https://platform.openai.com/docs/api-reference">here</a>.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END SIDENAV -->

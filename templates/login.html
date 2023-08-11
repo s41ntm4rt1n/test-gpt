@@ -1,0 +1,118 @@
+{% extends 'base.html'  %}
+{% load static %}
+{% block title %}Log In{% endblock title %}
+{% block styles %}
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #333; /* Dark background color */
+        background-image: url('{% static "assets/images/login-bg.png" %}');
+        background-size: fill;
+
+    }
+
+    .login {
+        background: transparent;
+    }
+
+    .login-form {
+        background: linear-gradient(to bottom right, #eae7ed, #575558);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        height: 350px;
+        width: 400px;
+    }
+    .btn-sm {
+        height: 50%;
+    }
+    
+    .custom-popup {
+        position: absolute;
+        background-color: rgba(184, 24, 24, 0.8);
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        display: none;
+        z-index: 999;
+    }
+
+    .custom-popup-text {
+        font-size: 14px;
+    }
+</style>
+{% endblock styles %}
+{% block content %}
+<main class="body">
+    {% if error_message %}
+    <div id="customPopup" class="custom-popup">
+        <span class="icon-error"><i class="bi bi-exclamation-circle">{{ error_message }}</i></span>
+    
+    </div>
+    {% endif %}
+    <div class="login">
+        <div class="col-lg-12 d-flex justify-content-center">
+            <form method="post" class="row g-3 needs-validation login-form shadow-lg">
+                {% csrf_token %}
+                <div class="col-md-12 position-relative">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                    
+                </div>
+                <div class="col-md-12 position-relative">
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
+                    
+                </div>
+                <div class="col-lg-12 d-flex justify-content-end ">
+                    <button id="loginBtn" class="btn btn-sm btn-dark shadow" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-12 d-flex justify-content-center bg-light rounded-2 my-5 shadow-lg">
+            <span class="text-black">Don't have an account? <a class="link-primary" href="{% url 'chat:signup' %}">Create Account</a></span>
+        </div>
+    </div>
+
+    
+</main>
+
+    {% block scripts %} 
+    {% if error_message %}
+    <script>
+        $(document).ready(function() {
+            showCustomPopup("{{ error_message }}", "error");
+        });
+
+        function showCustomPopup(message, type) {
+            var popup = $("#customPopup");
+            popup.find(".custom-popup-text").text(message);
+            
+            if (type === "error") {
+                popup.find(".icon-error").show();
+                popup.find(".icon-success").hide();
+                popup.css("background-color", "#FF6B6B");
+            } else if (type === "success") {
+                popup.find(".icon-error").hide();
+                popup.find(".icon-success").show();
+                popup.css("background-color", "#7ED957");
+            }
+            
+            popup.fadeIn();
+            popup.css({
+                top: 10,
+                right: 10
+            });
+            
+            setTimeout(function() {
+                popup.fadeOut();
+            }, 3000); // 3 seconds
+        }
+    </script>
+{% endif %}
+    {% endblock scripts %}
+{% endblock content %}

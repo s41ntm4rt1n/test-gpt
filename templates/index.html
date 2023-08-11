@@ -1,0 +1,213 @@
+{% extends 'base.html'  %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block styles %}
+<style>
+  .sidebar-btn{
+    background-color: #b4b4b4;
+    width: 45px;
+    border-radius: 8px;
+  }
+  .sidebar-btn-dark{
+    background-color: #4d4d4d;
+    width: 45px;
+    border-radius: 8px;
+  }
+  svg{
+    font-size: 25px;
+  }
+  .side-nav{
+    font-size: 12px;
+  }
+</style>
+{% endblock styles %}
+{% block content %}
+  <div class="container-fluid">
+    <div class="row">
+        {% include 'sidebar.html' %}
+       {% if message %}
+        <div id="customPopup" class="custom-popup">
+          <span class="icon-success"><i class="bi bi-check-circle"></i></span>
+          <span class="custom-popup-text">{{ message }}</span>
+        </div>   
+      {% endif %}
+      <!-- START CONTENT -->
+      <div class="content p-2 pt-2 col-lg-12 " id="mainContent">
+        <div class="container-fluid">
+          <div class="sidebar-btn sidebar-toggle col-lg-2">
+            <button id="sidebarToggle" class="btn btn-black">
+              <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+            </button>
+          </div>
+        </div>
+        <div class="chat-content-area mb-5" id="chatContainer">
+        <ul class="list-unstyled message-list m-2 px-5">         
+          <!-- START GPT CHAT -->
+          <!-- <li class="message recieved">
+            <div class="row gpt-chat-box rounded-2">
+              <div class="col-lg-2 p-0 chat-icon">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <img class="chatgpt-icon" src="{% static 'assets/images/gpt.jpg' %}">
+                  </div>
+              </div>
+              </div> 
+              <div class="col-lg-10 p-0 chat-txt">
+                Hi there <span class="lead">{{ user.username }}</span>, I am your chatbot. You can ask me anything <i class="bi bi-emoji-smile"></i>!
+              </div>
+            </div>
+          </li> -->
+          {% for message in object.get_messages %}
+            {% if chat.user == request.user %}
+            <li class="message sent">
+              <div class="row gpt-chat-box rounded-2">
+                <div class="col-lg-2 p-0 chat-icon">
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <img class="chatgpt-icon" src="{% static 'assets/images/gpt.jpg' %}">
+                    </div>
+                </div>
+                </div> 
+                <div class="col-lg-10 p-0 chat-txt">
+                  {{ message.message }}
+                </div>
+              </div>
+            </li>
+            <li class="message recieved">
+              <div class="row gpt-chat-box rounded-2">
+                <div class="col-lg-2 p-0 chat-icon">
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <img class="chatgpt-icon" src="{% static 'assets/images/gpt.jpg' %}">
+                    </div>
+                </div>
+                </div> 
+                <div class="col-lg-10 p-0 chat-txt">
+                  {{ message.response }}
+                </div>
+              </div>
+            </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+        </div>
+        <!-- START CHAT INPUTS --> 
+        <div class="chat-input-area sticky-bottom">
+          <div class="row m-0">
+            <form class="message-form"  method="post" >
+              {% csrf_token %}
+            <div class="col-12 chat-inputs-area-inner">
+              <div class="row chat-inputs-container d-flex align-items-center">
+                <textarea name="message" id="message" class="col-11 message-input" placeholder="Type your message"></textarea>
+                <span class="col-1"><button type="submit" class="bg-light rounded-2"><i class="fa fa-paper-plane" aria-hidden="true"></i>
+                </button></span>
+              </div>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+      <!-- END CONTENT -->
+    </div>
+  </div>
+  {% block scripts %}
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const mainContent = document.getElementById('mainContent');
+
+    $("document").ready(function(){
+
+      $(".sidebar-toggle").click(function(){
+        $(this).removeClass("sidebar-btn")
+      }, function(){
+        $(this).addClass("sidebar-btn-dark")
+      });
+      
+    }); 
+
+  
+    sidebarToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('sidebar-open');
+      mainContent.classList.toggle('content-open');
+
+  
+    });
+    
+  function handleViewportChange() {
+    if (window.innerWidth <= 992) { // Adjust the breakpoint as needed
+      sidebar.classList.remove('sidebar-open');
+      mainContent.classList.remove('content-open');
+    }
+  }
+  // Initial check on page load
+  handleViewportChange();
+
+  // Listen for window resize events
+  window.addEventListener('resize', handleViewportChange);
+    function autoScroll() {
+      var chatContainer = document.getElementById("chatContainer");
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    const messageList = document.querySelector('.message-list');
+    const messageForm = document.querySelector('.message-form');
+    const messageInput = document.querySelector('.message-input');
+
+    messageForm.addEventListener('submit', (event) =>{
+      event.preventDefault();
+      const message = messageInput.value.trim();
+      if (message.length === 0) {
+        return;
+      }
+      
+      const messageItem = document.createElement('li');
+      messageItem.classList.add('message', 'sent');
+      messageItem.innerHTML = `
+        <div class="row user-chat-box msg-box rounded-2">
+          <div class="col-lg-2 p-0 chat-icon">
+            <div class="row">
+            <div class="col-lg-3"><img class="chatgpt-icon" src="{% static 'assets/images/avatar.png' %}"></div>
+          </div>
+          </div>
+          <div class="col-lg-10 p-0 chat-txt">${message}</div>
+        </div>`;
+      messageList.appendChild(messageItem);
+      messageInput.value = '';
+
+      fetch('', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({
+          'csrfmiddlewaretoken' : document.querySelector('[name=csrfmiddlewaretoken]').value,
+          'message' : message
+        })
+      })
+
+      .then(response => response.json())
+      .then(data => {
+        const response = data.response;
+         const messageItem = document.createElement('li');
+         messageItem.classList.add('message', 'recieved');
+         messageItem.innerHTML = `
+         <div class="row gpt-chat-box rounded-2">
+          <div class="col-lg-2 p-0 chat-icon">
+            <div class="row">
+              <div class="col-lg-3">
+            <img class="chatgpt-icon" src="{% static 'assets/images/gpt.jpg' %}" /></div>
+          </div>
+          </div>
+          <div class="col-lg-10 p-0 chat-txt">
+            ${response}
+          </div>
+        </div>`;
+
+         messageList.appendChild(messageItem);
+
+         autoScroll();
+      });
+    });
+  </script>
+  {% endblock scripts %}
+  {% endblock content %}
+  
