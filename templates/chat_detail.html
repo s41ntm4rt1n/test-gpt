@@ -19,6 +19,17 @@
   .side-nav{
     font-size: 12px;
   }
+  .chat-input-area{
+    position: fixed;
+    bottom: 0;
+    width: 80%;
+    padding: 10px;
+
+  }
+  pre{
+    font-family: "SF Pro";
+    white-space: pre-wrap;
+  }
 </style>
 {% endblock styles %}
 {% block content %}
@@ -83,7 +94,7 @@
                 </div>
                 </div> 
                 <div class="col-lg-10 p-0 chat-txt">
-                  {{ message.response }}
+                <pre>{{ message.response |safe}}</pre> 
                 </div>
               </div>
             </li>
@@ -93,13 +104,14 @@
         </ul>
         </div>
         <!-- START CHAT INPUTS -->
-        <div class="chat-input-area sticky-bottom">
+        <div class="d-flex justify-content-center shadow-lg mt-2">
+        <div class="chat-input-area ">
           <div class="row m-0">
             <form class="message-form" method="post" action="{% url 'chat:send_message' chat_slug=chat.slug %}">
               {% csrf_token %}
             <div class="col-12 chat-inputs-area-inner">
               <div class="row chat-inputs-container d-flex align-items-center">
-                <textarea name="message" id="message" class="col-11 message-input" placeholder="Type your message"></textarea>
+                <textarea name="message" rows="3" id="message" class="col-11 message-input" placeholder="Type your message"></textarea>
                 <span class="col-1"><button type="submit" class="bg-light rounded-2"><i class="fa fa-paper-plane" aria-hidden="true"></i>
                 </button></span>
               </div>
@@ -107,6 +119,7 @@
           </form>
           </div>
         </div>
+      </div>
       </div>
       <!-- END CONTENT -->
     </div>

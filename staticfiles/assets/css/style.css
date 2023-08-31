@@ -86,7 +86,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 .chat-content-area {
   overflow: auto;
-  height: 500px;
+  height: 55em;
   overflow-x: hidden;
   overflow-y: scroll;
 }
@@ -200,12 +200,9 @@ footer {
     margin-bottom: 10px;
   }
 }
-/* Remove autofill and required field markers */
-input:-webkit-autofill,
-input:-webkit-autofill:required,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:required,
-select:-webkit-autofill,
-select:-webkit-autofill:required {
-    box-shadow: 0 0 0px 1000px white inset; /* Adjust the color as needed */
+input:required,
+textarea:required,
+select:required {
+    box-shadow: none;
+    -webkit-box-shadow: none; /* For Safari and older versions of Chrome */
 }

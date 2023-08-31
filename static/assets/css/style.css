@@ -7,6 +7,7 @@ body {
    /* Dark background color */
   margin: 0;
   padding: 0;
+  background-image: url(../images/bg.png);
 }
 
 .side-nav {
@@ -78,7 +79,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .content {
-  background-image: url(../images/bg.png);
+
   background-attachment: fill;
   background-color: #333;
   margin: 0px;
@@ -86,7 +87,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 .chat-content-area {
   overflow: auto;
-  height: 500px;
+  height: 48em;
   overflow-x: hidden;
   overflow-y: scroll;
 }

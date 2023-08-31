@@ -24,6 +24,7 @@
     }
     body{
       font-family: "SF Pro";
+      background: #333;
     }
     .side-nav {
       width: 250px;
@@ -42,22 +43,20 @@
 
     .content {
       transition: 0.3s;
+      overflow: hidden;
       overflow-y: hidden;
       overflow-x: hidden;
-      height: fit-content;
 
     }
 
     .content-open {
       transition: 0.3s;
       margin-left: 250px; /* Push content to the right when sidebar opens */
-      width: 84%;
+      width: 87%;
       overflow: auto;
       overflow-y: hidden;
       overflow-x: hidden;
       padding: 0;
-      background-color: #b4b4b4 ;
-      
       
     }
     @media (max-width: 768px) {

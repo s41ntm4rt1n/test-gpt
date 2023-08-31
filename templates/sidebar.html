@@ -17,7 +17,7 @@
             {% for chat in board %}
             <li class="nav-item rounded-1">
 			  	<div class=" row col-lg-12">
-            <div class="col-lg-8"><a class="nav-link text-white" href="{% url 'chat:chat' chat.slug %}"><p class="form-label"><i class="bi bi-chat-left-text-fill"></i>Chat {{ forloop.counter }}</p></a></div>
+            <div class="col-lg-8"><a class="nav-link text-white" href="{% url 'chat:chat' chat.slug %}"><p class="form-label"><i class="bi bi-chat-left-text-fill"></i>{{ chat.time_elapsed }}</p></a></div>
           <div class="col-lg-4"><a class="nav-link text-white" href="{% url 'chat:delete_chat' chat_slug=chat.slug %}"><i class="bi bi-trash3-fill"></i></a></div>
         </div>
             </li>
@@ -37,7 +37,7 @@
               </li>
               <!-- START SETTINGS -->
               <li class="nav-item rounded-2">
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
                   <i class="fas fa-cog"></i> Settings
                 </a>
               </li>
@@ -77,6 +77,27 @@
             <div class="modal-body my-4">
               For more regarding developer mode read <span class="text-info"><a href="#">this blog</a>.</span>
               <br>For more information regarding the api used, read the Open AI API docs <span class="text-info"><a href="https://platform.openai.com/docs/api-reference">here</a>.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" >
+          <div class="modal-content" style="height:400px;">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Settings</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body my-4">
+               <form method="post" action="{% url 'chat:save_api_key' chat_slug=chat.slug%}"> 
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="{{ api_key_form.api_key.id_for_label }}" class="form-label">API Key</label>
+                  {{ api_key_form.api_key }}
+                  <div class="d-flex justify-content-start m-3" class="form-text">Get your OpenAI API key&nbsp;<span><a href="https://platform.openai.com/account/api-keys">here.</a></span></div>
+                </div>
+                <button type="submit" class="btn btn-success">Update</button>
+              </form>
             </div>
           </div>
         </div>

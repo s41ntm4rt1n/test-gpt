@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Welcome{% endblock title %}
+{% block styles %}
+<style>
+body {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background-color: #f0f0f0;
+	font-family: Arial, sans-serif;
+	text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+	box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+}
+
+.cover-container {
+	text-align: center;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+	max-width: 42em;
+}
+
+</style>
+{% endblock styles %}
+{% block content %}
+<body class="d-flex h-100 text-center text-bg-dark">
+              
+	<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column top-50">
+
+	  <main class="px-3 ">
+	    <h1 class="display-5 text-white mb-md-4">Welcome&nbsp;<i class="bi bi-emoji-smile-fill"></i></h1>
+	    <p class="lead ">Login or sign up to use the app</p>
+	    <div class="row d-flex justify-content-center">
+		<div class="col-lg-3">
+			<p class="lead">
+			<a href="{% url 'chat:login' %}" class="btn btn-lg btn-light fw-bold border-white bg-white">Login</a>
+			</p>		
+		</div>
+		<div class="col-lg-3">
+			<p class="lead">
+			<a href="{% url 'chat:signup' %}" class="btn btn-lg btn-light fw-bold border-white bg-white">Sign Up</a>
+			</p>		
+		</div>
+	    </div>
+	    
+	  </main>
+	</div>
+  </body>
+  {% endblock content %}
