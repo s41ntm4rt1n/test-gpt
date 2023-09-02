@@ -34,7 +34,7 @@ API_KEY= #your OpenAI API key.
 ```
 or
 
-Upon successful login, go to **Settings** on the account sidebar and update your API key.
+Upon successful login, go to **⚙ Settings** on the account sidebar and update your API key.
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
