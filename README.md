@@ -27,7 +27,7 @@ python manage.py runserver
 and head on to [http://127.0.0.1:8000](http://127.0.0.1:8000) on your browser.
 
 ## Usage
-Go to OpenAI and get your [API key](https://platform.openai.com/account/api-keys) then navigate to ```**/chatbot/.env**``` to edit the ```**.env file**``` and add the API key.
+Go to OpenAI and get your [API key](https://platform.openai.com/account/api-keys) then navigate to ```/chatbot/.env``` to edit the **```.env file```** and add the API key.
 
 ```python
 API_KEY= #your OpenAI API key.
