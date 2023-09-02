@@ -5,7 +5,7 @@ TestGPT is a Django Chat GPT clone using OpenAI's gpt-3.5 model.
 ## Installation
 Clone this repository using ``` git clone https://www.github.com/s41ntm4rt1n/test-gpt.git``` or download the repo code to your local computer and extract it.
 
-1. First install the requirements by running:
+1. First install the requirements by running on the command line:
 ```bash
 pip install -r requirements.txt
 ```
