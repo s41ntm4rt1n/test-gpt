@@ -7,16 +7,16 @@ Clone this repository using ``` git clone https://www.github.com/s41ntm4rt1n/tes
 > [!IMPORTANT]
 > 1. **I encourage the use of virtual environments to separate project dependencies from local packages. Read  more about virtual environments [here](https://www.freecodecamp.org/news/how-to-setup-virtual-environments-in-python/).**
 >   - First ensure you have [python](https://www.python.org/) installed in your local machine since you will be using Python Package Installer [(PIP)](https://pypi.org/project/pip/) to install project dependencies.
- >  - Install your virtual environment using
+  - Install your virtual environment using
      **Windows**
      ```
         python -m venv env  
      ```
- >    **Linux**
+     **Linux**
      ```
      python3 -m venv env
      ```
- >    - Activate the virtual environment using:
+     - Activate the virtual environment using:
        **Windows**
      ```
         env\Scripts\activate
@@ -24,7 +24,7 @@ Clone this repository using ``` git clone https://www.github.com/s41ntm4rt1n/tes
      **Linux**
      ```
      source env/bin/activate
- >   ```
+    ```
 2.  Install the requirements by running on the command line:
 ```bash
 pip install -r requirements.txt
