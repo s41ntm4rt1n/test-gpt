@@ -8,9 +8,8 @@ Clone this repository using ``` git clone https://www.github.com/s41ntm4rt1n/tes
 > 1. **I encourage the use of virtual environments to separate project dependencies from local packages. Read  more about virtual environments [here](https://www.freecodecamp.org/news/how-to-setup-virtual-environments-in-python/).**
 >   - First ensure you have [python](https://www.python.org/) installed in your local machine since you will be using [Python Package Installer (PIP)](https://pypi.org/project/pip/) to install project dependencies.
   - Install your virtual environment using
-    <div align="center">
-	<code><img width="50" src="https://user-images.githubusercontent.com/25181517/186884150-05e9ff6d-340e-4802-9533-2c3f02363ee3.png" alt="Windows" title="Windows"/></code>**Windows**
-</div>
+    
+<code><img width="50" src="https://user-images.githubusercontent.com/25181517/186884150-05e9ff6d-340e-4802-9533-2c3f02363ee3.png" alt="Windows" title="Windows"/></code> **Windows**
      
      ```
         python -m venv env  
