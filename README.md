@@ -9,7 +9,7 @@ Clone this repository using ``` git clone https://www.github.com/s41ntm4rt1n/tes
 >   - First ensure you have [python](https://www.python.org/) installed in your local machine since you will be using [Python Package Installer (PIP)](https://pypi.org/project/pip/) to install project dependencies.
   - Install your virtual environment using
     
-     **https://user-images.githubusercontent.com/25181517/186884150-05e9ff6d-340e-4802-9533-2c3f02363ee3.pngWindows**
+     https://user-images.githubusercontent.com/25181517/186884150-05e9ff6d-340e-4802-9533-2c3f02363ee3.png **Windows**
      ```
         python -m venv env  
      ```
