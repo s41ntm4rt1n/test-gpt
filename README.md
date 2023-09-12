@@ -22,7 +22,7 @@ Clone this repository using ``` git clone https://www.github.com/s41ntm4rt1n/tes
        
      <code><img width="10" src="https://user-images.githubusercontent.com/25181517/186884150-05e9ff6d-340e-4802-9533-2c3f02363ee3.png" alt="Windows" title="Windows"/></code> **Windows**
      ```
-        env\Scripts\activate
+        env\Scripts\activate.bat
      ```
      <code><img width="10" src="https://user-images.githubusercontent.com/25181517/186884153-99edc188-e4aa-4c84-91b0-e2df260ebc33.png" alt="Ubuntu" title="Ubuntu"/></code> **Linux**
      ```
@@ -47,10 +47,11 @@ python manage.py migrate
 ```bash
 python manage.py runserver
 ```
-and head on to [http://127.0.0.1:8000](http://127.0.0.1:8000) on your browser.
  
 
 ## Usage
+Head on to [http://127.0.0.1:8000](http://127.0.0.1:8000) on your browser and create an account.
+
 Go to OpenAI and get your [API key](https://platform.openai.com/account/api-keys) then navigate to ```test-gpt/chatbot/.env``` to edit the **```.env```** file and add the API key.
 
 ```python
